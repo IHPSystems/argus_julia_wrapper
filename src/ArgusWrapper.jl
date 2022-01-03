@@ -1,0 +1,3 @@
+module ArgusWrapper
+
+end # module
