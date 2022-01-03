@@ -37,6 +37,18 @@ if(APPLE)
   target_link_libraries(argus_julia_wrapper julia_uv)
 endif()
 
+set(CMAKE_MODULE_PATH "${CMAKE_CURRENT_SOURCE_DIR}" "${CMAKE_MODULE_PATH}")
+
+find_package(Argus REQUIRED)
+
+include_directories(
+    ${ARGUS_INCLUDE_DIR}
+)
+
+target_link_libraries(${PROJECT_NAME}
+    ${ARGUS_LIBRARIES}
+)
+
 install(TARGETS
   argus_julia_wrapper
 LIBRARY DESTINATION lib
