@@ -31,4 +31,20 @@ JLCXX_MODULE define_argus_wrapper(jlcxx::Module& module)
     cameraDevicePtrs->assign(cameraDevices.begin(), cameraDevices.end());
     return cameraDevicePtrs;
   });
+
+  module.method("get_all_sensor_modes", [](void* cameraDevicePtr)
+  {
+    auto iCameraProperties = interface_cast<ICameraProperties>((CameraDevice*) cameraDevicePtr);
+    std::vector<SensorMode*> sensorModes;
+    auto status = iCameraProperties->getAllSensorModes(&sensorModes);
+    auto sensorModePtrs = new std::vector<void*>();
+    sensorModePtrs->assign(sensorModes.begin(), sensorModes.end());
+    return sensorModePtrs;
+  });
+
+  module.method("get_resolution", [](void* sensorModePtr)
+  {
+    auto iSensorMode = interface_cast<ISensorMode>((SensorMode*) sensorModePtr);
+    return std::make_tuple(iSensorMode->getResolution().width(), iSensorMode->getResolution().height());
+  });
 }
