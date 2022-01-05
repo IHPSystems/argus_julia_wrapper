@@ -25,7 +25,7 @@ message(STATUS "Found JlCxx at ${JlCxx_location}")
 
 add_library(argus_julia_wrapper SHARED argus_wrapper.cpp)
 
-target_link_libraries(argus_julia_wrapper JlCxx::cxxwrap_julia)
+target_link_libraries(argus_julia_wrapper JlCxx::cxxwrap_julia JlCxx::cxxwrap_julia_stl)
 
 if(APPLE)
   message(STATUS "Looking for julia uv library in ${Julia_LIBRARY_DIR}")
